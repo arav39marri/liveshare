@@ -5,3 +5,5 @@ build
 .DS_Store
 serviceAccountKey.json
 format.cjs
+client1/
+server2/

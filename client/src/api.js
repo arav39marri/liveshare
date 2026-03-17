@@ -56,27 +56,3 @@ export async function fetchFilesByOtp(otp) {
   }
   return data;
 }
-
-export async function createRoom() {
-  const res = await fetch(apiUrl("/api/room/new"), { method: "POST" });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    const msg = data.errorId
-      ? `${data.error || "Failed to create room"} (Error ID: ${data.errorId})`
-      : data.error || "Failed to create room";
-    throw new Error(msg);
-  }
-  return data;
-}
-
-export async function validateRoom(otp) {
-  const res = await fetch(apiUrl(`/api/room/${encodeURIComponent(otp)}`));
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) {
-    const msg = data.errorId
-      ? `${data.error || "Invalid room"} (Error ID: ${data.errorId})`
-      : data.error || "Invalid room";
-    throw new Error(msg);
-  }
-  return data;
-}
