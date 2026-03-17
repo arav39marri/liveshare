@@ -8,7 +8,7 @@ export default function Header({ theme, onToggleTheme }) {
   return (
     <div className="header">
       <Link to="/" className="brand">
-        <strong>FileShare</strong>
+        <strong>LiveShareFile</strong>
       </Link>
 
       <div className="nav">
