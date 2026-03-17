@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Files, UserX, ShieldCheck, Timer } from 'lucide-react';
 
 const features = [
@@ -25,6 +25,14 @@ const features = [
 ];
 
 export default function Features() {
+  useEffect(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("AdSense error:", e);
+    }
+  }, []);
+
   return (
     <div id="features" className="py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -59,7 +67,7 @@ export default function Features() {
              <span className="text-xs text-gray-500 absolute top-2 right-2 z-10">Advertisement</span>
              <ins className="adsbygoogle"
                  style={{ display: 'inline-block', width: '300px', height: '250px' }}
-                 data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                 data-ad-client="ca-pub-9098822825410735"
                  data-ad-slot="XXXXXXXXXX"></ins>
           </div>
         </div>
