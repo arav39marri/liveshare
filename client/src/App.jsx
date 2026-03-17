@@ -1,21 +1,20 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
+import RoomPage from './pages/RoomPage';
 
-import Header from "./components/Header.jsx";
-import UploadPage from "./pages/UploadPage.jsx";
-import DownloadPage from "./pages/DownloadPage.jsx";
-import { useTheme } from "./hooks/useTheme.js";
-
-export default function App() {
-  const { theme, toggleTheme } = useTheme();
-
+function App() {
   return (
-    <div className="container">
-      <Header theme={theme} onToggleTheme={toggleTheme} />
-      <Routes>
-        <Route path="/" element={<UploadPage />} />
-        <Route path="/download" element={<DownloadPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/room/:roomId" element={<RoomPage />} />
+      
+      {/* Placeholder routes for AdSense requirement */}
+      <Route path="/privacy-policy" element={<div className="p-10 text-white font-body">Privacy Policy Content</div>} />
+      <Route path="/terms" element={<div className="p-10 text-white font-body">Terms & Conditions Content</div>} />
+      <Route path="/about" element={<div className="p-10 text-white font-body">About FileShare</div>} />
+    </Routes>
   );
 }
+
+export default App;
