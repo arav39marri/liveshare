@@ -45,13 +45,17 @@ export default function FileList({ files, mode = 'send', onRemove }) {
           const fileId = file._id || file.fileId || idx;
 
           return (
-            <li key={fileId} className="bg-white/[0.03] backdrop-blur-xl border border-white/10 p-4 rounded-2xl flex items-center justify-between group hover:bg-white/[0.05] transition-colors">
+            <li 
+              key={fileId} 
+              className="bg-white/[0.03] backdrop-blur-xl border border-white/10 p-4 rounded-2xl flex items-center justify-between group hover:bg-white/[0.05] hover:border-indigo-500/30 hover:shadow-[0_0_20px_rgba(99,102,241,0.15)] transition-all duration-300 animate-slide-up"
+              style={{ animationDelay: `${idx * 0.05}s` }}
+            >
               <div className="flex items-center gap-4 overflow-hidden">
-                <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg shrink-0">
+                <div className="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg shrink-0 group-hover:bg-indigo-500/20 transition-colors">
                   {getFileIcon(fileType)}
                 </div>
                 <div className="truncate">
-                  <p className="text-sm font-medium text-white truncate font-body">{name}</p>
+                  <p className="text-sm font-medium text-white truncate font-body group-hover:text-indigo-200 transition-colors">{name}</p>
                   <p className="text-xs text-gray-500 font-body">{formatBytes(size)}</p>
                 </div>
               </div>
@@ -60,7 +64,7 @@ export default function FileList({ files, mode = 'send', onRemove }) {
                 <a
                   href={`${baseUrl}/api/download/${fileId}`}
                   download={name}
-                  className="p-2 text-gray-400 hover:text-indigo-400 rounded-lg hover:bg-white/10 transition-colors shrink-0"
+                  className="p-2 text-gray-400 hover:text-indigo-400 rounded-lg hover:bg-indigo-500/10 transition-colors shrink-0"
                   aria-label="Download file"
                 >
                   <Download size={18} />
@@ -68,7 +72,7 @@ export default function FileList({ files, mode = 'send', onRemove }) {
               ) : (
                 <button
                   onClick={() => onRemove && onRemove(idx)}
-                  className="p-2 text-gray-500 hover:text-red-400 rounded-lg hover:bg-white/5 transition-colors shrink-0"
+                  className="p-2 text-gray-500 hover:text-red-400 rounded-lg hover:bg-red-500/10 transition-colors shrink-0"
                   aria-label="Remove file"
                 >
                   <X size={18} />
