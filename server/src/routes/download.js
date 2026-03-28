@@ -9,22 +9,20 @@ function safeFilename(name) {
   return str.replace(/[\r\n"]/g, "_");
 }
 
-router.get("/:id", async (req, res, next) => {
+router.get("/:otp/:id", async (req, res, next) => {
   try {
+    const otp = String(req.params.otp || "");
     const id = String(req.params.id || "");
 
     const db = firestore();
-    const snap = await db
-      .collectionGroup("files")
-      .where("fileId", "==", id)
-      .limit(1)
-      .get();
+    const docRef = db.collection("rooms").doc(otp).collection("files").doc(id);
+    const docSnap = await docRef.get();
 
-    if (snap.empty) {
+    if (!docSnap.exists) {
       return res.status(404).json({ error: "File not found" });
     }
 
-    const file = snap.docs[0].data() || {};
+    const file = docSnap.data() || {};
     const expiresAt = file.expiresAt?.toDate ? file.expiresAt.toDate() : file.expiresAt;
     if (expiresAt && expiresAt <= new Date()) {
       return res.status(410).json({ error: "File expired" });

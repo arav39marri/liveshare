@@ -170,7 +170,7 @@ export default function RoomPage() {
               <UploadRing onDrop={handleUpload} isUploading={isUploading} />
             ) : (
               <div className="w-full max-w-lg flex flex-col items-center">
-                <FileList files={roomFiles} mode="receive" />
+                <FileList files={roomFiles} mode="receive" roomId={roomId} />
               </div>
             )}
 

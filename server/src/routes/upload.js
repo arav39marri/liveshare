@@ -77,7 +77,10 @@ async function handleUploadToOtp({ otp, files }) {
       },
     });
 
-    const docRef = await roomRef.collection("files").add({
+    const docRef = roomRef.collection("files").doc();
+    const fileId = docRef.id;
+    await docRef.set({
+      fileId,
       otp,
       original_filename: originalName,
       fileName: originalName,
@@ -90,15 +93,8 @@ async function handleUploadToOtp({ otp, files }) {
       expiresAt: room.expiresAt || null,
     });
 
-    await docRef.set(
-      {
-        fileId: docRef.id,
-      },
-      { merge: true }
-    );
-
     uploaded.push({
-      _id: docRef.id,
+      _id: fileId,
       otp,
       original_filename: originalName,
       bytes: size,

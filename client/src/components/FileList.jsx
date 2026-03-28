@@ -16,7 +16,7 @@ function formatBytes(bytes) {
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
 }
 
-export default function FileList({ files, mode = 'send', onRemove }) {
+export default function FileList({ files, mode = 'send', onRemove, roomId }) {
   const baseUrl = import.meta.env.VITE_API_BASE_URL || "";
 
   if (!files || files.length === 0) {
@@ -62,7 +62,7 @@ export default function FileList({ files, mode = 'send', onRemove }) {
 
               {mode === 'receive' ? (
                 <a
-                  href={`${baseUrl}/api/download/${fileId}`}
+                  href={`${baseUrl}/api/download/${roomId}/${fileId}`}
                   download={name}
                   className="p-2 text-gray-400 hover:text-indigo-400 rounded-lg hover:bg-indigo-500/10 transition-colors shrink-0"
                   aria-label="Download file"
@@ -91,7 +91,7 @@ export default function FileList({ files, mode = 'send', onRemove }) {
 
       {mode === 'receive' && (
         <a
-          href={`${baseUrl}/api/download/${files[0]?._id}`}
+          href={`${baseUrl}/api/download/${roomId}/${files[0]?._id}`}
           download
           className="w-full mt-6 rounded-full bg-indigo-500 px-8 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 transition-all duration-200 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-indigo-500/20 active:scale-95 text-center block"
         >
